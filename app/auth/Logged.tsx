@@ -3,8 +3,8 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 
-interface Props {
-  image: string | undefined | null;
+type Props = {
+  image: string;
 }
 
 const Logged = ({ image }: Props) => {
@@ -21,7 +21,7 @@ const Logged = ({ image }: Props) => {
           className="rounded-3xl"
           width={64}
           height={64}
-          src={image ? image : ""}
+          src={image}
           alt={"Foto de perfil"}
           priority
         />

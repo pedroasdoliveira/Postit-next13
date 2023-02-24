@@ -16,7 +16,7 @@ const Nav = async () => {
       </Link>
       <ul className="flex items-center gap-6">
         {/* Client side */}
-        {session?.user ? <Logged image={session.user?.image} /> : <Login />}
+        {session?.user ? <Logged image={session.user?.image || ""} /> : <Login />}
       </ul>
     </nav>
   );
