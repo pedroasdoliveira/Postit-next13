@@ -1,6 +1,7 @@
 import Nav from "./auth/Nav";
 import "./globals.css";
 import { Roboto } from "@next/font/google";
+import QuerWarper from "./auth/QueryWarper";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -17,8 +18,10 @@ export default function RootLayout({ children }) {
       */}
       <head />
       <body className={`mx-4 md:mx-48 xl:mx-96 ${roboto.variable} bg-gray-200`}>
-        <Nav />
-        {children}
+        <QuerWarper>
+          <Nav />
+          {children}
+        </QuerWarper>
       </body>
     </html>
   );

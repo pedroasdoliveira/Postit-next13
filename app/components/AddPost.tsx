@@ -1,14 +1,40 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [isDisable, setIsDisable] = useState(false);
 
+  const { mutate } = useMutation(
+    async (title: string) => await axios.post("/api/posts/addPost", { title }),
+    {
+      onError: (error: any) => {
+        console.log(error);
+      },
+    },
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        setTitle("");
+        setIsDisable(false);
+      },
+    }
+  );
+
   return (
     <>
-      <form className="bg-white my-8 p-8 rounded-md">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setIsDisable(true);
+          mutate(title);
+        }}
+        className="bg-white my-8 p-8 rounded-md"
+      >
         <div className="flex flex-col my-4">
           <textarea
             className="p-4 text-lg rounded-md my-2 bg-gray-200"
