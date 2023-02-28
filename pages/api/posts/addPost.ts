@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import prisma from "../../../prisma/client";
+import prisma from './../../../prisma/client';
 
-export default async function handler(
+export default async function handlerCreate(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === "Post") {
+  if (req.method === "POST") {
     const session = await getServerSession(req, res, authOptions);
     if (!session) {
       return res
@@ -15,10 +15,12 @@ export default async function handler(
         .json({ message: "Por favor escreva alguma coisa" });
     }
 
-    console.log(req.body);
+    console.log('CORPO ------->');
+    console.log(req.body)
 
     const title: string = req.body.title;
-    console.log(title);
+    console.log("TEXTO --------->");
+    console.log(title)
 
     const prismaUser = await prisma.user.findUnique({
       where: {
@@ -35,7 +37,7 @@ export default async function handler(
     if (!title.length) {
       return res
         .status(403)
-        .json({ message: "Esse espaço não pode ficar vazio" });
+        .json({ message: "Esse espaço não pode ficar vazio!" });
     }
 
     try {

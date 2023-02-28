@@ -6,7 +6,8 @@ import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
 const Nav = async () => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+  console.log("Dados user ------->");
+  console.log(session)
 
   return (
     <nav className="flex justify-between items-center py-8">

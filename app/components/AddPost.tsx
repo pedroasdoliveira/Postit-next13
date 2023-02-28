@@ -3,27 +3,25 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [isDisable, setIsDisable] = useState(false);
 
-  const { mutate } = useMutation(
-    async (title: string) => await axios.post("/api/posts/addPost", { title }),
-    {
-      onError: (error: any) => {
-        console.log(error);
-      },
+  const { mutate } = useMutation({
+    mutationFn: async (title: string) =>
+      await axios.post("./api/posts/addPost", { title }),
+    onError: (error: any) => {
+      console.log(error);
+      setIsDisable(false);
     },
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        setTitle("");
-        setIsDisable(false);
-      },
-    }
-  );
+    onSuccess: (data) => {
+      console.log(data);
+      console.log(data.data)
+      setTitle("");
+      setIsDisable(false);
+    },
+  });
 
   return (
     <>
