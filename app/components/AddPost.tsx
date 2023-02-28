@@ -1,12 +1,14 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [isDisable, setIsDisable] = useState(false);
+  let toastPostId: string;
 
   const { mutate } = useMutation({
     mutationFn: async (title: string) =>
@@ -14,12 +16,19 @@ const CreatePost = () => {
     onError: (error: any) => {
       console.log(error);
       setIsDisable(false);
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data.message, {
+          duration: 5000,
+          id: toastPostId,
+        });
+      }
     },
     onSuccess: (data) => {
       console.log(data);
-      console.log(data.data)
+      console.log(data.data);
       setTitle("");
       setIsDisable(false);
+      toast.success("Post criado!", { duration: 5000, id: toastPostId });
     },
   });
 
@@ -29,6 +38,7 @@ const CreatePost = () => {
         onSubmit={(e) => {
           e.preventDefault();
           setIsDisable(true);
+          toastPostId = toast.loading("Criando post...", { id: toastPostId });
           mutate(title);
         }}
         className="bg-white my-8 p-8 rounded-md"

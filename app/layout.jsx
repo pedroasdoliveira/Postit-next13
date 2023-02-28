@@ -1,7 +1,7 @@
-import Nav from "./auth/Nav";
-import "./globals.css";
 import { Roboto } from "@next/font/google";
+import Nav from "./auth/Nav";
 import QuerWarper from "./auth/QueryWarper";
+import "./globals.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
