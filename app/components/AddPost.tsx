@@ -12,7 +12,7 @@ const CreatePost = () => {
 
   const { mutate } = useMutation({
     mutationFn: async (title: string) =>
-      await axios.post("./api/posts/addPost", { title }),
+      await axios.post("./api/posts/handlePost", { title }),
     onError: (error: any) => {
       console.log(error);
       setIsDisable(false);
