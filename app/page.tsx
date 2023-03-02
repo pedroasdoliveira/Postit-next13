@@ -15,7 +15,7 @@ export default function Home() {
   const { data, isLoading, error } = useQuery({
     queryFn: allPosts,
     queryKey: ["posts"],
-    cacheTime: 10000,
+    cacheTime: 3000,
   });
 
   if (error) return error;
