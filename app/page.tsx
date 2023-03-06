@@ -12,7 +12,7 @@ const allPosts = async () => {
 };
 
 export default function Home() {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<PostType[]>({
     queryFn: allPosts,
     queryKey: ["posts"],
     cacheTime: 3000,
@@ -22,18 +22,17 @@ export default function Home() {
 
   if (isLoading) return "Carregando...";
 
-  console.log(data)
-
   return (
     <main>
       <CreatePost />
-      {data?.map((post: PostType) => (
+      {data?.map((post) => (
         <Posts
           key={post.id}
           id={post.id}
           name={post.user.name}
           image={post.user.image}
           postTitle={post.title}
+          comments={post.comment} 
         />
       ))}
     </main>

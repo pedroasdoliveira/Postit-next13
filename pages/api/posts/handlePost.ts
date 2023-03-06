@@ -52,7 +52,7 @@ async function handlerGetAll(req: NextApiRequest, res: NextApiResponse) {
     const data = await prisma.post.findMany({
       include: {
         user: true,
-        Comment: true
+        comment: true,
       },
       orderBy: {
         createdAt: "desc",

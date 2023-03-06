@@ -6,11 +6,23 @@ export interface UserTypes {
   image: string;
 }
 
+export interface CommentType {
+  id: string;
+  message: string;
+  createdAt: string;
+  postId: string;
+  userId: string;
+}
+
 export interface PostType {
   id: string;
   title: string;
   published: boolean;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
   user: UserTypes;
+  comment: CommentType;
 }
 
 export interface DataPostType {

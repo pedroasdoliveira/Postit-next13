@@ -46,7 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  Post    Post[]
+  post    Post[]
   Comment Comment[]
 }
 
@@ -67,7 +67,7 @@ model Post {
 
   userId  String
   user    User      @relation(fields: [userId], references: [id])
-  Comment Comment[]
+  comment Comment[]
 }
 
 model Comment {
