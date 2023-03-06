@@ -1,6 +1,7 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import MyPosts from "./MyPosts";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -14,6 +15,7 @@ const Dashboard = async () => {
       <h1 className="text-2xl font-bold text-center">
         Bem vindo de volta {session.user?.name}!
       </h1>
+      <MyPosts />
     </main>
   );
 };

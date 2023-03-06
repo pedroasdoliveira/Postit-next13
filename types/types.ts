@@ -34,3 +34,16 @@ export interface DataPostType {
   user: UserTypes;
   userId: string;
 }
+
+export interface AuthPostsType {
+  id: string;
+  email: string;
+  image: string;
+  name: string;
+  post: {
+    id: string;
+    title: string;
+    createdAt: string;
+    comment?: CommentType[];
+  }[];
+}
