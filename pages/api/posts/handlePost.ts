@@ -38,7 +38,7 @@ async function handlerCreate(req: NextApiRequest, res: NextApiResponse) {
     const result = await prisma.post.create({
       data: {
         title,
-        userId: prismaUser.id,
+        userId: prismaUser?.id,
       },
     });
     res.status(201).json(result);
@@ -64,11 +64,32 @@ async function handlerGetAll(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
+async function handlerDelete(req: NextApiRequest, res: NextApiResponse) {
+  const session = await getServerSession(req, res, authOptions);
+  if (!session) {
+    return res.status(401).json({ message: "Por favor faça seu login!" });
+  }
+
+  try {
+    const postId = req.body;
+    const result = await prisma.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+    res.status(204).json(result);
+  } catch (error) {
+    return res.status(404).json({ message: "Erro ao tentar deletar o Post!" });
+  }
+}
+
 export default function handlerPost(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case "POST":
       return handlerCreate(req, res);
     case "GET":
       return handlerGetAll(req, res);
+    case "DELETE":
+      return handlerDelete(req, res);
   }
 }

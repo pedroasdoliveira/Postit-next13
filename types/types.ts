@@ -12,6 +12,7 @@ export interface CommentType {
   createdAt: string;
   postId: string;
   userId: string;
+  user?: UserTypes;
 }
 
 export interface PostType {
@@ -23,6 +24,17 @@ export interface PostType {
   userId: string;
   user: UserTypes;
   comment: CommentType;
+}
+
+export interface PostCommentsType {
+  id: string;
+  title: string;
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  user: UserTypes;
+  comment: CommentType[];
 }
 
 export interface DataPostType {

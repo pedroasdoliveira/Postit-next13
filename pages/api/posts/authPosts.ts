@@ -28,7 +28,7 @@ const handleAuthPosts = async (req: NextApiRequest, res: NextApiResponse) => {
       });
       return res.status(200).json(data);
     } catch (error) {
-      return res.status(404).json({ message: "Erro" });
+      return res.status(404).json({ message: "Erro ao encontrar o usuário!" });
     }
   }
 };

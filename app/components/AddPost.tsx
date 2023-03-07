@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [isDisable, setIsDisable] = useState(false);
+  const queryClient = useQueryClient()
   let toastPostId: string;
 
   const { mutate } = useMutation({
@@ -24,10 +25,9 @@ const CreatePost = () => {
       }
     },
     onSuccess: (data) => {
-      console.log(data);
-      console.log(data.data);
       setTitle("");
       setIsDisable(false);
+      queryClient.invalidateQueries(["posts"])
       toast.success("Post criado!", { duration: 5000, id: toastPostId });
     },
   });
